@@ -12,7 +12,12 @@ import validationOptions from './utils/validation-options';
 
 async function bootstrap() {
   // Nest 애플리케이션 인스턴스를 생성합니다.
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
+
+  app.enableCors({
+    origin: ['http://localhost:4000', 'http://43.202.204.173:4000/'],
+    credentials: true,
+  });
 
   // ConfigService를 사용하여 구성 정보를 얻습니다.
   const configService = app.get(ConfigService<AllConfigType>);
